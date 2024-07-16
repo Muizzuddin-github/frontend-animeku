@@ -4,12 +4,20 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import IsLogin from "./auth/IsLogin";
 import History from "./pages/History";
+import IsNotLogin from "./auth/IsNotLogin";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route
+          path="/"
+          element={
+            <IsNotLogin>
+              <Login />
+            </IsNotLogin>
+          }
+        />
         <Route path="/register" element={<Register />} />
         <Route
           path="/dashboard"
