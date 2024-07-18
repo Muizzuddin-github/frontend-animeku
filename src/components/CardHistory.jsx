@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import UserApi from "../api/user";
 import { useState } from "react";
 import Spinner from "./Spinner";
+import { useNavigate } from "react-router-dom";
 
 const CardHistory = ({
   id,
@@ -15,8 +16,12 @@ const CardHistory = ({
   status,
   score,
   setAnime,
+  setBtnHistoryDisable,
+  setSearchDisable,
+  setErrorMessage,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const redirect = useNavigate();
 
   const sensorImg = (genre) => {
     const sensorGenre = ["Hentai", "Ecchi"];
@@ -29,16 +34,23 @@ const CardHistory = ({
   const delAnime = async () => {
     try {
       if (!isLoading) {
+        setBtnHistoryDisable(true);
+        setSearchDisable(true);
         setIsLoading(true);
         await UserApi.del(id);
 
         setAnime((prev) => prev.filter((v) => v.history._id != id));
-
         setIsLoading(false);
+        setBtnHistoryDisable(false);
+        setSearchDisable(false);
       }
     } catch (err) {
       setIsLoading(false);
-      console.log(err);
+      if (err.response.status === 403 || err.response.status >= 500) {
+        redirect("/");
+      } else {
+        setErrorMessage(err.message);
+      }
     }
   };
 
@@ -94,6 +106,7 @@ const CardHistory = ({
         {trailer ? (
           <button
             type="button"
+            disabled={isLoading}
             className="mt-2 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800"
             onClick={() => setTrailer(trailer)}
           >
@@ -121,4 +134,7 @@ CardHistory.propTypes = {
   status: PropTypes.string,
   score: PropTypes.number,
   setAnime: PropTypes.func,
+  setBtnHistoryDisable: PropTypes.func,
+  setSearchDisable: PropTypes.func,
+  setErrorMessage: PropTypes.func,
 };

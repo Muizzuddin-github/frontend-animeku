@@ -3,7 +3,6 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import IsLogin from "./auth/IsLogin";
-import History from "./pages/History";
 import IsNotLogin from "./auth/IsNotLogin";
 
 function App() {
@@ -24,14 +23,6 @@ function App() {
           element={
             <IsLogin>
               <Dashboard />
-            </IsLogin>
-          }
-        />
-        <Route
-          path="/history"
-          element={
-            <IsLogin>
-              <History />
             </IsLogin>
           }
         />
