@@ -17,7 +17,6 @@ const Card = ({
   score,
   setBtnHistoryDisable,
   setSearchDisable,
-  setErrorMessage,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const redirect = useNavigate();
@@ -52,12 +51,10 @@ const Card = ({
         setIsLoading(false);
       }
     } catch (err) {
-      setIsLoading(false);
       if (err.response.status === 403 || err.response.status >= 500) {
         redirect("/");
-      } else {
-        setErrorMessage(err.message);
       }
+      setIsLoading(false);
     }
   };
 
@@ -142,5 +139,4 @@ Card.propTypes = {
   score: PropTypes.number,
   setBtnHistoryDisable: PropTypes.func,
   setSearchDisable: PropTypes.func,
-  setErrorMessage: PropTypes.func,
 };

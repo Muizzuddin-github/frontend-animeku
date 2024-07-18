@@ -191,8 +191,6 @@ const Dashboard = () => {
                       score={v?.score}
                       setTrailer={setTrailer}
                       setBtnHistoryDisable={setBtnHistoryDisable}
-                      setSearchDisable={setSearchDisable}
-                      setErrorMessage={setErrorMessage}
                     />
                   ))}
                 </section>
