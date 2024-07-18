@@ -29,7 +29,7 @@ const Register = () => {
       if (isNaN(e.target.value)) {
         e.target.value = "";
       } else {
-        e.target.nextElementSibling.focus();
+        e.target.nextElementSibling?.focus();
       }
     }
   };
@@ -37,11 +37,11 @@ const Register = () => {
   const handleInputOtpBackspace = (e) => {
     if (e.key === "Backspace") {
       e.target.value = "";
-      e.target.previousElementSibling.focus();
+      e.target.previousElementSibling?.focus();
     } else if (e.key === "ArrowRight") {
-      e.target.nextElementSibling.focus();
+      e.target.nextElementSibling?.focus();
     } else if (e.key === "ArrowLeft") {
-      e.target.previousElementSibling.focus();
+      e.target.previousElementSibling?.focus();
     }
   };
 
@@ -132,7 +132,7 @@ const Register = () => {
               >
                 <section
                   ref={inputsOtp}
-                  className="w-full flex justify-center gap-4 p-5 "
+                  className="w-full flex justify-center gap-4 p-5 text-black"
                 >
                   <input
                     type="text"
