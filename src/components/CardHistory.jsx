@@ -45,7 +45,6 @@ const CardHistory = ({
         setSearchDisable(false);
       }
     } catch (err) {
-      console.log(err);
       setIsLoading(false);
       if (err.response.status === 403 || err.response.status >= 500) {
         redirect("/");
