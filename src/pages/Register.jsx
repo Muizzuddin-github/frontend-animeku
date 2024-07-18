@@ -202,7 +202,10 @@ const Register = () => {
                   <button
                     type="button"
                     disabled={btnDisableOtp}
-                    onClick={() => setShowOtpModal(false)}
+                    onClick={() => {
+                      setShowOtpModal(false);
+                      setRegisterSaveError("");
+                    }}
                   >
                     Kembali
                   </button>
