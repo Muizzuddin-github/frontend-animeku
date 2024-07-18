@@ -122,7 +122,7 @@ const Login = () => {
               </button>
 
               <Link
-                to={"/register"}
+                to={btnDisable ? "/" : "/register"}
                 className="underline text-gray-700 text-sm"
               >
                 Belum punya akun ?

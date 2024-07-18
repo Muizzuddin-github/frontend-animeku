@@ -8,22 +8,35 @@ import { useNavigate } from "react-router-dom";
 const IsNotLogin = ({ children }) => {
   const [isNotLogin, setIsNotLogin] = useState(false);
   const [, setUsername] = useContext(UserContext);
+  const [internalServerError, setInternalServerError] = useState("");
 
   const redirect = useNavigate();
 
   useEffect(
     function () {
-      Auth.isLogin().then((res) => {
-        setIsNotLogin(true);
+      Auth.isLogin()
+        .then((res) => {
+          setIsNotLogin(true);
 
-        setUsername(res.data.username);
-        redirect("/dashboard");
-      });
+          setUsername(res.data.username);
+          redirect("/dashboard");
+        })
+        .catch((err) => {
+          if (err.response.status === 403) {
+            setIsNotLogin(true);
+          } else {
+            setInternalServerError(err.message);
+          }
+        });
     },
     [setUsername, redirect]
   );
 
-  return isNotLogin ? (
+  return internalServerError ? (
+    <section className="flex justify-center items-center h-[100vh] text-red-500 text-xl">
+      <p>{internalServerError}</p>
+    </section>
+  ) : isNotLogin ? (
     children
   ) : (
     <section className="h-[100vh] flex justify-center items-center">
