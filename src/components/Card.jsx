@@ -62,7 +62,9 @@ const Card = ({
     <section className=" max-w-72 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 relative">
       <section>
         <section
-          className="p-1 rounded-md bg-white absolute top-1 right-1 flex justify-center items-center cursor-pointer"
+          className={`p-1 rounded-md bg-white absolute top-1 right-1 flex justify-center items-center ${
+            isLoading ? "" : "cursor-pointer"
+          }`}
           onClick={addAnime}
         >
           {isLoading ? (
