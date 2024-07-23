@@ -2,7 +2,6 @@ import { HelmetProvider, Helmet } from "react-helmet-async";
 import Anime from "../api/anime";
 import { useEffect, useState } from "react";
 import Card from "../components/Card";
-import Spinner from "../components/Spinner";
 import { useContext } from "react";
 import { UserContext } from "../hooks/ContextProvider";
 import VideoModal from "../components/VideoModal";
@@ -10,6 +9,7 @@ import UserApi from "../api/user";
 import CardHistory from "../components/CardHistory";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import CardLoading from "../components/CardLoading";
 
 const Dashboard = () => {
   const [animeSearch, setAnimeSearch] = useState([]);
@@ -148,8 +148,10 @@ const Dashboard = () => {
       <main>
         <section className="container m-auto ">
           {isLoading ? (
-            <section className="w-full flex justify-center items-center pt-56">
-              <Spinner />
+            <section>
+              <section className="flex gap-10 flex-wrap justify-between items-start mt-7">
+                <CardLoading count={8} />
+              </section>
             </section>
           ) : (
             <section>
